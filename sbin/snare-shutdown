@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Shuts down the snare process with a ctlserver at $SNARECTL.
+
+set | grep ^CONF= > /dev/null || CONF=/usr/local/etc/crosier/crosier.conf
+. $CONF || exit 1
+
+echo "Running $CROSIER $SNARECTL shutdown < /dev/null..."
+$CROSIER $SNARECTL shutdown < /dev/null

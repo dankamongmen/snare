@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Add me to snmpd.conf, using the extend or pass directive, ie:
+#
+# extend [MIBOID] snare /usr/local/sbin/snare-snmp
+# pass [MIBOID] snare /usr/local/sbin/snare-snmp
+#
+# See http://www.net-snmp.org/docs/man/snmpd.conf.html for full details.
+
+set -e || { echo "Couldn't set -e; exiting" >&2 ; exit 1 ; }
+set -o nounset || { echo "Couldn't set -o nounset; exiting" >&2 ; exit 1 ; }
+
+SNAREDUMP=`which bassdrum-dumpstate 2>/dev/null` || { echo "Couldn't find snare-dumpstate on the PATH ($PATH); exiting" >&2 ; exit 1 ; }
+XML=`which xml 2>/dev/null || which xmlstarlet 2>/dev/null` || { echo "Couldn't find xml/xmlstarlet on the PATH ($PATH); exiting" >&2 ; exit 1 ; }
+
+"$SNAREDUMP" 2> /dev/null | \
+ "$XML" ed -d //pfd -d //oqueue_state | \
+ "$XML" sel -t -m //\*\[not\(\*\)\] -v . -o ' '

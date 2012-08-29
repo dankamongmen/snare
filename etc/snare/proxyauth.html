@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Web Proxy Service - Notification</title>
+<style>
+	body{
+		background:#DEDEDE repeat-y scroll center top !important;
+		font-family:Arial,Helvetica,sans-serif;
+		color: #7F7F7F;
+		padding:0;margin:0;
+	}
+	div#background{
+		background:#FFFFFF !important;
+		margin:0 auto;
+		text-align:left;
+		width:960px;
+		padding-bottom: 30px;
+	}
+	#titleBar{
+		background:#7F7F7F repeat-x scroll left top;
+		height: 25px;
+		color: #ffffff;
+		font-size: 16px;
+		font-weight:bold;
+		padding: 7px;
+		text-align: center;
+	}
+	#content, #content td{
+		font-weight:bold;
+		text-align: center;
+		
+	}
+	#content table th{ text-align:left; color: #666; background:#DEDEDE;}
+	#content table td{ text-align:left;}
+	#copyright{ color:#888888; }
+</style>
+</head>
+<body>
+<div id="background">
+        <br><br>
+		<div id="titleBar">
+            Authorization Required
+		</div>
+		<div id="content">
+            <br>
+            If you forgot your password, enter your email address below and click Submit to receive password reset instructions.
+            <br><br>
+            <form action="https://wsd.mcafee.com/proxyauth/forgot_password" method="POST">
+            <table class="bordered" id="logintable" style="margin: 0 auto;">
+            <tr>
+                <th>Email</th>
+                <td><input type="text" name="user" value=""/></td>
+            </tr>
+            <tr>
+                <td colspan=2 align="center">
+                    <center>
+                    <button type="submit" name="oper" value="forgot">Submit</button>
+                    </center>
+                </td>
+            </tr>
+            </table>
+            </form>
+		</div>
+</div><!-- background -->
+</body></html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <start>
+  <element name="snare">
+   <interleave>
+    <optional>
+     <element name="smtp">
+      <interleave>
+       <optional>
+        <element name="port"><data type="unsignedInt"/></element>
+       </optional>
+      </interleave>
+     </element>
+    </optional>
+    <optional>
+     <element name="http">
+      <interleave>
+       <optional>
+        <element name="port"><data type="unsignedInt"/></element>
+       </optional>
+      </interleave>
+     </element>
+    </optional>
+    <optional>
+     <element name="icap">
+      <interleave>
+       <zeroOrMore>
+        <element name="module"><text/></element>
+       </zeroOrMore>
+       <optional>
+        <element name="port"><data type="unsignedInt"/></element>
+       </optional>
+       <optional>
+        <element name="shmprefix"><text/></element>
+       </optional>
+       <optional>
+        <element name="reqmod">
+         <element name="uripath"><text/></element>
+        </element>
+       </optional>
+       <optional>
+        <element name="respmod">
+         <element name="uripath"><text/></element>
+        </element>
+       </optional>
+       <optional>
+        <element name="handlerconf">
+         <interleave>
+          <element name="policyfile"><text/></element>
+          <element name="repperhost"><text/></element>
+          <optional>
+           <element name="testuri"><text/></element>
+           <element name="localtesturi"><text/></element>
+          </optional>
+          <optional>
+           <element name="testuri2"><text/></element>
+           <element name="localtesturi2"><text/></element>
+          </optional>
+          <element name="auth_token_hmac_key"><text/></element>
+          <optional>
+           <element name="auth_time_window"><data type="long"/></element>
+          </optional>
+          <optional>
+           <element name="bypass_time_window"><data type="long"/></element>
+          </optional>
+          <element name="whoami_uri"><text/></element>
+          <element name="pacuri"><text/></element>
+	  <optional>
+            <element name="pacuri2"><text/></element>
+	  </optional>
+          <element name="blockuri"><text/></element>
+          <element name="noauthuri"><text/></element>
+          <optional>
+           <element name="nopolicyuri"><text/></element>
+          </optional>
+          <optional>
+           <element name="swps_uri_prefix"><text/></element>
+          </optional>
+          <element name="loginuri"><text/></element>
+          <element name="login_uri_prefix"><text/></element>
+          <optional>
+           <element name="ntlm_workaround_uri_prefix"><text/></element>
+          </optional>
+          <optional>
+           <element name="ntlm_workaround_uri"><text/></element>
+          </optional>
+          <optional>
+           <element name="ntlm_auth_fail_uri"><text/></element>
+          </optional>
+          <element name="cookies_disabled_uri"><text/></element>
+          <optional>
+           <element name="proxyauth_nonce_count"><data type="unsignedInt"/></element>
+          </optional>
+          <optional>
+           <element name="proxyauth_html"><text/></element>
+          </optional>
+          <optional>
+           <element name="proxyauth_vid_size"><data type="unsignedInt"/></element>
+          </optional>
+          <zeroOrMore>
+           <element name="allow_port"><data type="unsignedInt"/></element>
+          </zeroOrMore>
+          <optional>
+           <element name="generic_pac"><text/></element>
+          </optional>
+          <zeroOrMore>
+           <element name="ntlm_exclude_ua"><text/></element>
+          </zeroOrMore>
+          <zeroOrMore>
+           <element name="cookie_exclude_ua"><text/></element>
+          </zeroOrMore>
+          <zeroOrMore>
+           <element name="testuri_map"><text/></element>
+          </zeroOrMore>
+          <optional>
+           <interleave>
+            <element name="bontool"><text/></element>
+            <element name="bonsigs"><text/></element>
+           </interleave>
+          </optional>
+         </interleave>
+        </element>
+       </optional>
+      </interleave>
+     </element>
+    </optional>
+   </interleave>
+  </element>
+ </start>
+</grammar>

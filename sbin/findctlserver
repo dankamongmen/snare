@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e || { echo "Failure setting -e; exiting" >&2 ; exit 1 ; }
+
+if [ $# -ne 1 ] ; then
+	echo "usage: $0 appname"
+	exit 1
+fi
+
+if [ "`uname`" = "FreeBSD" ] ; then
+	netstat -l -f unix | grep "$1" || exit 1
+elif [ "`uname`" = "Linux" ] ; then
+	netstat -lx | grep "$1" || exit 1
+else 
+	echo 'Unsupported OS, sorry!'
+	exit 1
+fi

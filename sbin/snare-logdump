@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Sends a no-op message to snare, ensuring that it's alive and addressable
+# via the ctlserver at $SNARECTL.
+
+set | grep ^CONF= > /dev/null || CONF=/usr/local/etc/crosier/crosier.conf
+. $CONF || exit 1
+
+echo "Running $CROSIER $SNARECTL log_dump < /dev/null..."
+exec $CROSIER $SNARECTL log_dump < /dev/null

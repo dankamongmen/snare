@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <start>
+  <element name="icap_stats">
+   <element name="OPTIONS"><ref name="method"/></element>
+   <element name="REQMOD"><ref name="method"/></element>
+   <element name="RESPMOD"><ref name="method"/></element>
+
+   <optional><element name="allow"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="host"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="encapsulated"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="user-agent"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-client-ip"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-server-ip"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-proxy-addr"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-proxy-port"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-encapsulated-protocol"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-scan-progress-interval"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="x-chunk-extensions"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="preview"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="date"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="expires"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="pragma"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="trailer"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="upgrade"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="authorization"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="from"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="connection"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="cache-control"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="referer"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="unknownhdr-extension"><ref name="icapheaderstat"/></element></optional>
+   <optional><element name="unknownhdr-non-extension"><ref name="icapheaderstat"/></element></optional>
+
+   <element name="connections"><ref name="icapstat"/></element>
+   <element name="nomod"><ref name="icapheaderstat"/></element>
+   <element name="noverdict"><ref name="icapstat"/></element>
+   <element name="verdicts_postconn"><ref name="icapstat"/></element>
+   <element name="oqueue_headers"><ref name="icapstat"/></element>
+   <element name="oqueue_bodies"><ref name="icapstat"/></element>
+   <element name="oqueue_header_octets"><ref name="icapstat"/></element>
+   <element name="oqueue_body_octets"><ref name="icapstat"/></element>
+   <element name="oqueue_created"><ref name="icapstat"/></element>
+   <element name="oqueue_recycled"><ref name="icapstat"/></element>
+   <element name="oqueue_stack"><ref name="icapstat"/></element>
+   <element name="trailers"><ref name="icapstat"/></element>
+   <element name="trailer_lines"><ref name="icapstat"/></element>
+   <element name="no_httpbody"><ref name="icapstat"/></element>
+   <element name="no_httphdrs"><ref name="icapstat"/></element>
+   <element name="lateverdicts"><ref name="icapstat"/></element>
+   <element name="pipeline_violations"><ref name="icapstat"/></element>
+   <element name="bad_http_reqline"><ref name="icapstat"/></element>
+   <element name="bad_http_request"><ref name="icapstat"/></element>
+   <element name="httpdupheader"><ref name="icapstat"/></element>
+
+   <!-- Number of times no compression was used. -->
+   <element name="gzip_unused"><ref name="icapstat"/></element>
+   <!-- Number of times upstream fulfilled a client's compression request. -->
+   <element name="gzip_native"><ref name="icapstat"/></element>
+   <!-- Number of times upstream applied unrequested compression. -->
+   <element name="gzip_server"><ref name="icapstat"/></element>
+   <!-- Number of times we inserted a compression request. -->
+   <element name="gzip_inserted"><ref name="icapstat"/></element>
+   <!-- Number of times our inserted compression requests were fulfilled. -->
+   <element name="gzip_preload"><ref name="icapstat"/></element>
+   <!-- Number of times we fulfilled a client's compression request. -->
+   <element name="gzip_postload"><ref name="icapstat"/></element>
+   <element name="inflateerr"><ref name="icapstat"/></element>
+   <element name="deflateerr"><ref name="icapstat"/></element>
+   <element name="chunks_gzipped"><ref name="icapstat"/></element>
+   <element name="chunks_gunzipped"><ref name="icapstat"/></element>
+   <!-- The number of bytes saved due to compression performed upstream. -->
+   <element name="gzip_front_octets"><ref name="icapsignedstat"/></element>
+   <!-- The number of bytes saved due to compression performed by us. -->
+   <element name="gzip_back_octets"><ref name="icapsignedstat"/></element>
+
+   <element name="oqueuett"><ref name="avgmaxstat"/></element>
+   <element name="tps"><ref name="avgmaxstat"/></element>
+  </element>
+ </start>
+
+ <define name="icapheaderstat">
+  <data type="unsignedInt"/>
+ </define>
+
+ <define name="icapstat">
+  <data type="unsignedInt"/>
+ </define>
+
+ <define name="icapsignedstat">
+  <data type="int"/>
+ </define>
+
+ <define name="method">
+  <element name="init"><data type="unsignedInt"/></element>
+  <element name="ok"><data type="unsignedInt"/></element>
+  <element name="fail"><data type="unsignedInt"/></element>
+  <element name="inc"><data type="unsignedInt"/></element>
+  <element name="icaptt"><ref name="avgmaxstat"/></element>
+  <element name="icaptxt"><ref name="avgmaxstat"/></element>
+  <element name="ERROR"><ref name="verdict"/></element>
+  <element name="DONE"><ref name="verdict"/></element>
+ </define>
+
+ <define name="verdict">
+  <data type="unsignedInt"/>
+ </define>
+
+ <define name="avgmaxstat">
+  <element name="avg"><data type="unsignedInt"/></element>
+  <element name="max"><data type="unsignedInt"/></element>
+ </define>
+
+</grammar>

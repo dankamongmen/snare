@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <start>
+  <element name="pfd_state">
+   <zeroOrMore>
+    <element name="pfd">
+     <optional><element name="in"><empty/></element></optional>
+     <optional><element name="out"><empty/></element></optional>
+     <optional><element name="timer"><empty/></element></optional>
+     <element name="fd"><data type="unsignedInt"/></element>
+     <element name="age"><data type="unsignedInt"/></element>
+     <element name="idle"><data type="integer"/></element>
+     <element name="handleus"><ref name="avgmaxstat"/></element>
+     <element name="rxcbs"><data type="unsignedInt"/></element>
+     <element name="txcbs"><data type="unsignedInt"/></element>
+     <choice>
+      <element name="icap">
+       <element name="rbuf"><data type="unsignedInt"/></element>
+       <element name="sbuf"><data type="unsignedInt"/></element>
+       <optional><choice>
+        <element name="OPTIONS"><empty/></element>
+        <element name="REQMOD"><empty/></element>
+        <element name="RESPMOD"><empty/></element>
+       </choice></optional>
+       <optional><element name="hdrs"><ref name="oqueue_key"/></element></optional>
+       <optional><element name="body"><ref name="oqueue_key"/></element></optional>
+       <optional><element name="drain"><ref name="oqueue_key"/></element></optional>
+       <optional><element name="trans"><ref name="oqueue_key"/></element></optional>
+      </element>
+      <element name="icapsrv">
+       <choice>
+        <element name="ipv4"><empty/></element>
+        <element name="ipv6"><empty/></element>
+       </choice>
+      </element>
+      <element name="signalfd"><empty/></element>
+      <element name="timerfd"><empty/></element>
+      <element name="librep">
+       <element name="rbuf"><data type="unsignedInt"/></element>
+       <element name="sbuf"><data type="unsignedInt"/></element>
+      </element>
+      <element name="libbon"><empty/></element>
+     </choice>
+    </element>
+   </zeroOrMore>
+   <element name="maxactivefds"><data type="unsignedInt"/></element>
+   <element name="activefds"><data type="unsignedInt"/></element>
+   <element name="handlerus"><ref name="avgmaxstat"/></element>
+   <element name="sigchldrx"><data type="unsignedInt"/></element>
+   <element name="exceptions"><data type="unsignedInt"/></element>
+   <element name="events"><ref name="avgmaxstat"/></element>
+  </element>
+ </start>
+
+ <define name="oqueue_key">
+  <optional>
+   <element name="fn"><text/></element>
+   <element name="fd"><data type="unsignedInt"/></element>
+  </optional>
+  <!-- The length of the actual map. We've allocated this much memory. -->
+  <element name="maplen"><data type="unsignedInt"/></element>
+  <!-- The map's offset relative to the underlying object. offset <= reallen -->
+  <element name="offset"><data type="unsignedInt"/></element>
+  <!-- How much we've actually read of the underlying object. reallen >= maplen -->
+  <element name="reallen"><data type="unsignedInt"/></element>
+ </define>
+
+ <define name="avgmaxstat">
+  <element name="avg"><data type="unsignedInt"/></element>
+  <element name="max"><data type="unsignedInt"/></element>
+ </define>
+
+</grammar>

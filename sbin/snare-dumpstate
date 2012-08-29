@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Queries the snare process having a ctlserver at $SNARECTL regarding all
+# possible state data.
+
+set | grep ^CONF= > /dev/null || CONF=/usr/local/etc/crosier/crosier.conf
+. $CONF || exit 1
+
+STATETAG="snare_state"
+
+echo -n "<$STATETAG>"
+for i in snare_dump health_dump mem_dump pfd_table_dump icap_stats_dump ; do
+	#echo "Running $CROSIER $SNARECTL $i < /dev/null..." >&2
+	"$CROSIER" "$SNARECTL" "$i" < /dev/null
+done
+echo "</$STATETAG>"
+
+echo "Successfully queried $SNARECTL for all state." >&2
